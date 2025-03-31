@@ -7,10 +7,10 @@ terraform {
 }
 
 provider "google" {
-  project     = "forward-theorem-455316-n3"
+  project     = "terraform-gcp-Rcordero"
   region      = "us-east1"
   zone        = "us-east1-d"
-  credentials = file("<path-to-your-json-key-file>")
+  credentials = file("C:/Users/User/Documents/terraformkey")
 }
 
 module "vpc" {
