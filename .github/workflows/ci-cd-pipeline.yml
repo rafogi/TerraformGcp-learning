@@ -20,10 +20,10 @@ jobs:
 
       - name: Initialize Terraform
         run: terraform init
-        working-directory: ./root
+        working-directory: .
 
       - name: Apply Terraform
         run: terraform apply -auto-approve
-        working-directory: ./root
+        working-directory: .
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
