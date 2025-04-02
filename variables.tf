@@ -39,8 +39,3 @@ variable "image" {
   type        = string
   default     = "ubuntu-os-cloud/ubuntu-2004-lts"
 }
-
-variable "google_credentials" {
-  description = "Google Cloud service account credentials"
-  type        = string
-}

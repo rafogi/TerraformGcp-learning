@@ -1,4 +1,8 @@
 terraform {
+  backend "gcs" {
+    bucket = "your-gcs-bucket-name"
+    prefix = "terraform/state"
+  }
   required_providers {
     google = {
       source = "hashicorp/google"
@@ -10,7 +14,7 @@ provider "google" {
   project     = "terraform-gcp-Rcordero"
   region      = "us-east1"
   zone        = "us-east1-d"
-  credentials = file("C:/Users/User/Documents/terraformkey")
+  credentials = file("/workspace/terraformkey.json")
 }
 
 resource "google_compute_network" "vpc_network" {
