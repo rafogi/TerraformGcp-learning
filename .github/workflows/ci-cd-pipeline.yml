@@ -27,3 +27,5 @@ jobs:
         working-directory: ./
         env:
           GOOGLE_CREDENTIALS: ${{ secrets.GOOGLE_CREDENTIALS }}
+        with:
+          google_credentials: ${{ secrets.GOOGLE_CREDENTIALS }}
