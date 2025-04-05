@@ -1,0 +1,8 @@
+FROM --platform=arm64 
+node:18.16.0-alpine3.18
+WORKDIR /usr/src/app
+COPY package.json
+RUN npm install
+COPT ..
+expose 80
+cmd ["node", "app.js"]
