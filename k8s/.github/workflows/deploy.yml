@@ -1,0 +1,41 @@
+# filepath: .github/workflows/deploy.yml
+name: Deploy to Kubernetes
+
+on:
+  push:
+    branches:
+      - main  # Trigger deployment on pushes to the main branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the code
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Google Cloud SDK
+      - name: Set up Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          project_id: raffy-gke-terraform
+          service_account_key: ${{ secrets.GCP_SA_KEY }}
+          export_default_credentials: true
+
+      # Step 3: Authenticate Docker with Google Artifact Registry
+      - name: Authenticate Docker
+        run: gcloud auth configure-docker us-central1-docker.pkg.dev
+
+      # Step 4: Build and Push Docker Image
+      - name: Build and push Docker image
+        run: |
+          docker build -t us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1 .
+          docker push us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1
+
+      # Step 5: Deploy to Kubernetes
+      - name: Deploy to Kubernetes
+        run: |
+          gcloud container clusters get-credentials cost-optimized-cluster-1 --zone us-central1-c --project raffy-gke-terraform
+          kubectl apply -f k8s/deployment.yml
+          kubectl apply -f k8s/service.yml
