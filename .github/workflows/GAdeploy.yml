@@ -40,7 +40,8 @@ jobs:
       # Step 6: Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: |
-
+          #install gke-gcloud-auth-plugin
+          gcloud components install gke-gcloud-auth-plugin
           # Authenticate with the GKE cluster
           gcloud container clusters get-credentials cost-optimized-cluster-1 --zone us-central1-c --project raffy-gke-terraform
 
