@@ -38,4 +38,4 @@ jobs:
           gcloud container clusters get-credentials cost-optimized-cluster-1 --zone us-central1-c --project raffy-gke-terraform
           kubectl apply -f k8s/deployment.yml
           kubectl apply -f k8s/service.yml
-#comment for test
+#commen
