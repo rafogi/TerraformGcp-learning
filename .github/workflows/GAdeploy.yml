@@ -33,8 +33,9 @@ jobs:
       # Step 5: Build and Push Docker Image
       - name: Build and push Docker image
         run: |
-          docker build -t us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1 -f nodeapp/Dockerfile nodeapp
-          docker push us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1
+          IMAGE_TAG=us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1:${{ github.sha }}
+          docker build -t $IMAGE_TAG -f nodeapp/Dockerfile nodeapp
+          docker push $IMAGE_TAG
 
       # Step 6: Deploy to Kubernetes
       - name: Deploy to Kubernetes
