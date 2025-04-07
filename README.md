@@ -37,6 +37,7 @@ This project demonstrates deploying a Node.js application to Google Kubernetes E
 git clone https://github.com/rafogi/TerraformGcp-learning.git
 cd TerraformGcp-learning
 
+---
 
 ### **3. Set up github actions**
 Add the service account key as a secret in your GitHub repository:
