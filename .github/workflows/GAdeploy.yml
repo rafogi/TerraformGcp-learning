@@ -40,8 +40,13 @@ jobs:
       # Step 6: Deploy to Kubernetes
       - name: Deploy to Kubernetes
         run: |
+          #install gke-gcloud-auth-plugin
+          gcloud components install gke-gcloud-auth-plugin
           IMAGE_TAG=us-central1-docker.pkg.dev/raffy-gke-terraform/testrepository/nodeimage1:${{ github.sha }}
           sed -i "s|{{IMAGE_TAG}}|${IMAGE_TAG}|g" k8s/deploy.yml
+          # Authenticate with the GKE cluster
           gcloud container clusters get-credentials cost-optimized-cluster-1 --zone us-central1-c --project raffy-gke-terraform
+
+          # Apply Kubernetes manifests
           kubectl apply -f k8s/deploy.yml
           kubectl apply -f k8s/service.yml
